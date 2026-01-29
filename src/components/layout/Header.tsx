@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,7 +16,7 @@ const Header = () => {
   const navLinks = [
     { href: "#sobre", label: "Sobre" },
     { href: "#cardapio", label: "Cardápio" },
-    { href: "#delivery", label: "Delivery" },
+    { href: "#delivery", label: "Funcionamento" },
     { href: "#localizacao", label: "Localização" },
     { href: "#contato", label: "Contato" },
   ];
@@ -49,11 +48,6 @@ const Header = () => {
               </a>
             ))}
           </nav>
-
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <WhatsAppButton>Pedir Agora</WhatsAppButton>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -101,9 +95,6 @@ const Header = () => {
               {link.label}
             </a>
           ))}
-          <div className="pt-4">
-            <WhatsAppButton className="w-full">Pedir Agora</WhatsAppButton>
-          </div>
         </nav>
       </div>
     </header>

@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 interface Review {
   id: number;
   name: string;
@@ -40,43 +38,23 @@ const reviews: Review[] = [
 ];
 
 const Reviews = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-up");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="section-padding bg-background">
+    <section className="section-padding bg-background">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <span className="animate-on-scroll inline-block mb-4 text-primary text-sm font-medium tracking-wider uppercase">
+          <span className="inline-block mb-4 text-primary text-sm font-medium tracking-wider uppercase">
             Avaliações
           </span>
-          <h2 className="animate-on-scroll animate-delay-100 font-display text-4xl md:text-6xl mb-4">
-            O QUE <span className="text-gradient">DIZEM POR AÍ</span>
+          <h2 className="font-display text-4xl md:text-5xl mb-4">
+            O QUE NOSSOS CLIENTES <span className="text-primary">DIZEM</span>
           </h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reviews.map((review, index) => (
+          {reviews.map((review) => (
             <div
               key={review.id}
-              className={`animate-on-scroll animate-delay-${index * 100} card-gradient rounded-2xl p-6 card-shadow`}
+              className="bg-muted/30 rounded-2xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
