@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import burgerClassic from "@/assets/burger-classic.jpg";
+import burgerCheeseBacon from "@/assets/burger-cheese-bacon.jpg";
+import burgerBbq from "@/assets/burger-bbq.jpg";
 import burgerSpecial from "@/assets/burger-special.jpg";
+import burgerEgg from "@/assets/burger-egg.jpg";
+import burgerTruffle from "@/assets/burger-truffle.jpg";
 import burgerHouse from "@/assets/burger-house.jpg";
 import fries from "@/assets/fries.jpg";
+import onionRings from "@/assets/onion-rings.jpg";
+import friesLoaded from "@/assets/fries-loaded.jpg";
+import comboClassic from "@/assets/combo-classic.jpg";
+import comboPremium from "@/assets/combo-premium.jpg";
 
 type Category = "classicos" | "especiais" | "combos" | "acompanhamentos";
 
@@ -30,7 +38,7 @@ const menuItems: MenuItem[] = [
     name: "Cheese Bacon",
     description: "Blend 160g, queijo cheddar duplo, bacon crocante e maionese defumada",
     price: 36.9,
-    image: burgerClassic,
+    image: burgerCheeseBacon,
     category: "classicos",
   },
   {
@@ -38,7 +46,7 @@ const menuItems: MenuItem[] = [
     name: "BBQ Ranch",
     description: "Blend 160g, queijo prato, bacon, onion rings, molho BBQ e ranch",
     price: 38.9,
-    image: burgerClassic,
+    image: burgerBbq,
     category: "classicos",
   },
   {
@@ -54,7 +62,7 @@ const menuItems: MenuItem[] = [
     name: "Egg Bacon",
     description: "Blend 180g, ovo com gema mole, bacon, queijo e molho chipotle",
     price: 42.9,
-    image: burgerSpecial,
+    image: burgerEgg,
     category: "especiais",
   },
   {
@@ -62,7 +70,7 @@ const menuItems: MenuItem[] = [
     name: "Trufado",
     description: "Blend 180g, queijo brie, cogumelos salteados e maionese trufada",
     price: 49.9,
-    image: burgerSpecial,
+    image: burgerTruffle,
     category: "especiais",
   },
   {
@@ -79,7 +87,7 @@ const menuItems: MenuItem[] = [
     name: "Combo Clássico",
     description: "Smash Clássico + Fritas médias + Refrigerante 350ml",
     price: 49.9,
-    image: burgerClassic,
+    image: comboClassic,
     category: "combos",
   },
   {
@@ -87,7 +95,7 @@ const menuItems: MenuItem[] = [
     name: "Combo Premium",
     description: "Qualquer especial + Fritas grandes + Milk Shake",
     price: 69.9,
-    image: burgerSpecial,
+    image: comboPremium,
     category: "combos",
   },
   {
@@ -103,7 +111,7 @@ const menuItems: MenuItem[] = [
     name: "Onion Rings",
     description: "Anéis de cebola empanados e crocantes",
     price: 22.9,
-    image: fries,
+    image: onionRings,
     category: "acompanhamentos",
   },
   {
@@ -111,7 +119,7 @@ const menuItems: MenuItem[] = [
     name: "Batata com Cheddar",
     description: "Fritas cobertas com cheddar cremoso e bacon",
     price: 28.9,
-    image: fries,
+    image: friesLoaded,
     category: "acompanhamentos",
   },
 ];
