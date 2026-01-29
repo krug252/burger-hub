@@ -1,61 +1,22 @@
-import { useEffect, useRef } from "react";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
-
 const Delivery = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-up");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section
-      id="delivery"
-      ref={sectionRef}
-      className="section-padding hero-gradient relative overflow-hidden"
-    >
-      {/* Decorative background */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      </div>
-
-      <div className="container mx-auto relative z-10">
+    <section id="delivery" className="section-padding bg-muted/30">
+      <div className="container mx-auto">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="animate-on-scroll inline-block mb-4 text-primary text-sm font-medium tracking-wider uppercase">
-            Delivery
+          <span className="inline-block mb-4 text-primary text-sm font-medium tracking-wider uppercase">
+            Funcionamento
           </span>
-          <h2 className="animate-on-scroll animate-delay-100 font-display text-4xl md:text-6xl mb-6">
-            RECEBA EM CASA <span className="text-gradient">QUENTINHO</span>
+          <h2 className="font-display text-4xl md:text-5xl mb-6">
+            HORÁRIOS E <span className="text-primary">ENTREGA</span>
           </h2>
-          <p className="animate-on-scroll animate-delay-200 text-xl text-muted-foreground mb-12">
-            Faça seu pedido pelo WhatsApp e receba seu hambúrguer artesanal no conforto da sua casa.
+          <p className="text-lg text-muted-foreground mb-12">
+            Atendemos presencialmente e também via delivery para a sua comodidade.
           </p>
 
-          <div className="animate-on-scroll animate-delay-300 mb-12">
-            <WhatsAppButton size="lg">
-              Pedir pelo WhatsApp
-            </WhatsAppButton>
-          </div>
-
           {/* Info Cards */}
-          <div className="animate-on-scroll animate-delay-400 grid md:grid-cols-3 gap-6">
-            <div className="card-gradient rounded-2xl p-6 card-shadow">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-background rounded-2xl p-6 border border-border">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                 <svg
                   className="w-7 h-7 text-primary"
                   fill="none"
@@ -78,8 +39,8 @@ const Delivery = () => {
               </p>
             </div>
 
-            <div className="card-gradient rounded-2xl p-6 card-shadow">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+            <div className="bg-background rounded-2xl p-6 border border-border">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                 <svg
                   className="w-7 h-7 text-primary"
                   fill="none"
@@ -108,8 +69,8 @@ const Delivery = () => {
               </p>
             </div>
 
-            <div className="card-gradient rounded-2xl p-6 card-shadow">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+            <div className="bg-background rounded-2xl p-6 border border-border">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                 <svg
                   className="w-7 h-7 text-primary"
                   fill="none"

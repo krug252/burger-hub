@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import burgerClassic from "@/assets/burger-classic.jpg";
 import burgerCheeseBacon from "@/assets/burger-cheese-bacon.jpg";
 import burgerBbq from "@/assets/burger-bbq.jpg";
@@ -133,59 +133,36 @@ const categories: { id: Category; label: string }[] = [
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("classicos");
-  const sectionRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = menuItems.filter(
     (item) => item.category === activeCategory
   );
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-up");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = sectionRef.current?.querySelectorAll(".animate-on-scroll");
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, [activeCategory]);
-
   return (
-    <section
-      id="cardapio"
-      ref={sectionRef}
-      className="section-padding bg-background"
-    >
+    <section id="cardapio" className="section-padding bg-background">
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="animate-on-scroll inline-block mb-4 text-primary text-sm font-medium tracking-wider uppercase">
+          <span className="inline-block mb-4 text-primary text-sm font-medium tracking-wider uppercase">
             Nosso Cardápio
           </span>
-          <h2 className="animate-on-scroll animate-delay-100 font-display text-4xl md:text-6xl mb-4">
-            ESCOLHA O <span className="text-gradient">SEU SABOR</span>
+          <h2 className="font-display text-4xl md:text-5xl mb-4">
+            CONHEÇA NOSSOS <span className="text-primary">SABORES</span>
           </h2>
-          <p className="animate-on-scroll animate-delay-200 text-muted-foreground max-w-2xl mx-auto">
-            Todos os hambúrgueres são feitos na hora, com ingredientes frescos e muito amor.
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Todos os hambúrgueres são feitos na hora, com ingredientes frescos e muito carinho.
           </p>
         </div>
 
         {/* Category Tabs */}
-        <div className="animate-on-scroll animate-delay-300 flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-5 py-2 rounded-full font-medium transition-colors ${
                 activeCategory === category.id
-                  ? "accent-gradient text-primary-foreground"
+                  ? "bg-primary text-primary-foreground"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
               }`}
             >
@@ -196,10 +173,10 @@ const Menu = () => {
 
         {/* Menu Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item, index) => (
+          {filteredItems.map((item) => (
             <div
               key={item.id}
-              className={`animate-on-scroll animate-delay-${(index % 4) * 100} group relative card-gradient rounded-2xl overflow-hidden card-shadow hover:scale-[1.02] transition-transform duration-300`}
+              className="group relative bg-muted/30 rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-colors"
             >
               {item.featured && (
                 <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-secondary text-secondary-foreground text-xs font-bold rounded-full">
@@ -210,7 +187,7 @@ const Menu = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-6">
@@ -218,11 +195,9 @@ const Menu = () => {
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                   {item.description}
                 </p>
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-3xl text-primary">
-                    R$ {item.price.toFixed(2).replace(".", ",")}
-                  </span>
-                </div>
+                <span className="font-display text-2xl text-primary">
+                  R$ {item.price.toFixed(2).replace(".", ",")}
+                </span>
               </div>
             </div>
           ))}
