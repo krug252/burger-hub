@@ -12,7 +12,14 @@ import friesLoaded from "@/assets/fries-loaded.jpg";
 import comboClassic from "@/assets/combo-classic.jpg";
 import comboPremium from "@/assets/combo-premium.jpg";
 
-type Category = "classicos" | "especiais" | "combos" | "acompanhamentos";
+
+type Category =
+  | "todos"
+  | "classicos"
+  | "especiais"
+  | "combos"
+  | "acompanhamentos";
+
 
 interface MenuItem {
   id: number;
@@ -125,6 +132,7 @@ const menuItems: MenuItem[] = [
 ];
 
 const categories: { id: Category; label: string }[] = [
+  { id: "todos", label: "Todos" },
   { id: "classicos", label: "Clássicos" },
   { id: "especiais", label: "Especiais" },
   { id: "combos", label: "Combos" },
@@ -132,69 +140,100 @@ const categories: { id: Category; label: string }[] = [
 ];
 
 const Menu = () => {
-  const [activeCategory, setActiveCategory] = useState<Category>("classicos");
+  const [activeCategory, setActiveCategory] =
+    useState<Category>("classicos");
 
-  const filteredItems = menuItems.filter(
-    (item) => item.category === activeCategory
-  );
+const filteredItems =
+  activeCategory === "todos"
+    ? menuItems
+    : menuItems.filter(
+        (item) => item.category === activeCategory
+      );
+
 
   return (
     <section id="cardapio" className="section-padding bg-background">
       <div className="container mx-auto">
+
         {/* Header */}
         <div className="text-center mb-12">
           <span className="inline-block mb-4 text-primary text-sm font-medium tracking-wider uppercase">
             Nosso Cardápio
           </span>
+
           <h2 className="font-display text-4xl md:text-5xl mb-4">
             CONHEÇA NOSSOS <span className="text-primary">SABORES</span>
           </h2>
+
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Todos os hambúrgueres são feitos na hora, com ingredientes frescos e muito carinho.
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {/* Categorias */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-5 py-2 rounded-full font-medium transition-colors ${
-                activeCategory === category.id
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
-              }`}
+              className={`px-6 py-2 rounded-full font-medium transition-all duration-300
+                ${
+                  activeCategory === category.id
+                    ? "bg-primary text-primary-foreground scale-105 shadow-lg"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"
+                }`}
             >
               {category.label}
             </button>
           ))}
         </div>
 
-        {/* Menu Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid */}
+        <div
+          key={activeCategory}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300"
+        >
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="group relative bg-muted/30 rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-colors"
+              className="group relative bg-muted/30 rounded-2xl overflow-hidden
+                         border border-border transition-all duration-300
+                         hover:-translate-y-3 hover:shadow-2xl
+                         hover:border-primary/40"
             >
+              {/* Destaque */}
               {item.featured && (
-                <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-secondary text-secondary-foreground text-xs font-bold rounded-full">
+                <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-secondary text-secondary-foreground text-xs font-bold rounded-full shadow-md">
                   ★ DESTAQUE
                 </div>
               )}
-              <div className="aspect-square overflow-hidden">
+
+              {/* Imagem */}
+              <div className="relative aspect-square overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover transition-transform duration-500
+                             group-hover:scale-110"
+                />
+
+                {/* Overlay brilho */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent
+                             opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-2xl mb-2">{item.name}</h3>
+
+              {/* Conteúdo */}
+              <div className="p-6 relative z-10">
+                <h3 className="font-display text-2xl mb-2 transition-colors group-hover:text-primary">
+                  {item.name}
+                </h3>
+
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                   {item.description}
                 </p>
+
                 <span className="font-display text-2xl text-primary">
                   R$ {item.price.toFixed(2).replace(".", ",")}
                 </span>
@@ -202,6 +241,7 @@ const Menu = () => {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
