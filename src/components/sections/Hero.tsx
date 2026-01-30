@@ -13,7 +13,7 @@ const Hero = () => {
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-background backdrop-blur-[2px]" />
       </div>
 
       {/* Content */}
